@@ -1,0 +1,9 @@
+Avancement du projet :
+EasyAdmin fonctionnel (via la route /admin) avec la fonctionnalité show installée
+les entités Member, Video et Videotheque ont été mises en place ainsi que leurs relations OneToMany
+la consultation de toutes les entités est possible via la route /[entité]/list (remplacez [entité] par member, video ou videotheque)
+la consultation des informations d'une entités particulière est possible via la route /[entité]/[id]
+Des liens ont été mis en place pour naviguer sur le site
+données tests via DataFixture fonctionnelles
+
+pour lancer symfony server:start il faut se mettre dans le dossier LaCollec
