@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}video list !{% endblock %}
+
+{% block body %}
+        <h1>videos list</h1>
+        <p>Voici toutes les videos:</p>
+
+        <div class="line-break"></div>
+        <ul>
+            {% for videotheque in app.user.member.videotheque %}
+            {% for video in videotheque.contenu %}
+            <div class="square">
+            <h5><a href="{{ path('video_show', {'id': video.id}) }}">{{ video.nom }}</a></h5>
+            {% if vich_uploader_asset(video, 'imageFile') is none %}
+			    <p style="float:left"><img src="/images/video/vide.png" class="image"/></p>
+	        {% else %}
+		    <p style="float:left"><img src="{{ vich_uploader_asset(video, 'imageFile') }}" class="image"/></p>
+            {% endif %}
+            <li class="text-with-margin">{{ video.annee }}</li>
+            <li class="text-with-margin">{{ video.genre }}</li>
+            </div>
+            <div class="line-break"></div>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+{% endblock %}

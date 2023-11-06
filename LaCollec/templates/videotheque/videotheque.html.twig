@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}videotheque list !{% endblock %}
+
+{% block body %}
+        <h1>videotheque list</h1>
+        <p>Voici toutes les videotheques:</p>
+        
+        <ul>
+            {% for videotheque in app.user.member.videotheque %}
+            <li><a href="{{ path('videotheque_show', {'id': videotheque.id}) }}">{{ videotheque.description }}</a></li>
+            {% endfor %}
+        </ul>
+{% endblock %}

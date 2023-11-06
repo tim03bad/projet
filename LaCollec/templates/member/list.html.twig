@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}member n° {{ app.user.member.id }} details{% endblock %}
+
+{% block body %}
+        <h2>Member Details :</h2>
+        
+        <ul>
+            <li>nom : {{ app.user.member.nom }}</li>
+            {% if app.user.member.description is not null %}
+            <li>description : {{ app.user.member.description }}</li>
+            {% endif %}
+            <br />
+            videotheques :
+            <br />
+            {% for videotheque in app.user.member.videotheque %}
+            <li><a href="{{ path('videotheque_show', {'id': videotheque.id}) }}">{{ videotheque.description }}</a></li>
+            {% endfor %}
+            <br />
+            selections :
+            <br />
+            {% for selection in app.user.member.selection %}
+            <li><a href="{{ path('selection_show', {'id': selection.id}) }}">{{ selection.description }}</a></li>
+            {% endfor %}
+        </ul>
+{% endblock %}

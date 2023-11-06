@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Videotheque{% endblock %}
+
+{% block body %}
+    <h1>Edit Videotheque</h1>
+
+    {{ include('videotheque/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('videotheque_list') }}">back to list</a>
+
+    {{ include('videotheque/_delete_form.html.twig') }}
+{% endblock %}

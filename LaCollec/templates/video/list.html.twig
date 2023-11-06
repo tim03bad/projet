@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}video n° {{ video.id }} details{% endblock %}
+
+{% block body %}
+        <h2>Video Details :</h2>
+
+        
+        <ul>
+            <li>titre : {{ video.nom }}</li>
+            <li>année de sortie : {{ video.annee }}</li>
+            <li>genre : {{ video.genre }}</li>
+            {% if vich_uploader_asset(video, 'imageFile') is none %}
+			<p><img src="/images/video/vide.png" class="visual"/></p>
+	    {% else %}
+		    <p><img src="{{ vich_uploader_asset(video, 'imageFile') }}" class="image"/></p>
+            {% endif %}
+        </ul>
+        <br />
+        {% if is_granted('ROLE_USER') %}
+        {% if app.user.member.nom==video.videotheque.member.nom %}
+	    <a href="{{ path('video_edit', {'id': video.id}) }}">edit</a><br />
+            <a href="{{ path('video_list') }}">retour à la liste des vidéos</a><br />
+            <a href="{{ path('videotheque_show', {'id': video.videotheque.id}) }}">retour à  {{ video.videotheque.description }}</a>
+	{% endif %}
+        {% endif %}
+{% endblock %}

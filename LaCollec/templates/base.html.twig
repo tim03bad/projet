@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        {% endblock %}{# stylesheets #}
+	<style>
+		.square {
+		      width: 700px; /* Set the width of the square */
+		      height: 200px; /* Set the height of the square (same as width to make it a square) */
+		      border: 1px solid #000; /* Border style, width, and color */
+		      padding: 10px; /* Padding inside the square to separate text from the border */
+		      display: inline-block; /* Make the element inline-block to contain the text within the square */
+		      margin-left: 80px;
+		    }
+		.image {
+			height : 150px;
+			}
+		.visual {
+			height : 300px;
+			}
+		.line-break {
+		      margin-bottom: 20px; /* Adjust the margin to specify the space between lines (in pixels) */
+		    }
+		.text-with-margin {
+			  margin-left: 130px; /* Adjust the margin size as needed */
+			}
+		.centered-text {
+		  text-align: center;
+		}
+	    body {
+	      background-color: #dee2e6;
+	    }
+	  </style>
+    </head>
+    <body>
+    	{% block menu %}
+	     <!-- Navigation -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		    <div class="container px-4 px-lg-5">
+		        <a class="navbar-brand" href="{{ path('selection_home') }}">LaCollec</a>
+		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				  {{ render_bootstrap_menu('main') }}
+				  {% if app.user %}
+				       {{ render_bootstrap_menu('account') }}
+				  {% else %}
+				       {{ render_bootstrap_menu('anonymousaccount') }}
+				  {% endif %} {# app.user #}
+			     </ul>
+		        </div>
+		    </div>
+		</nav>
+	{% endblock %}{# menu #}
+
+		{%  block alerts %}
+		{% for type, messages in app.flashes %}
+			{% for message in messages %}
+			{%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+			{%if type == 'message'%} {% set type = 'info' %} {%endif%}
+			<div class="alert alert-{{ type }} alert-dismissible" role="alert">
+				<div>{{ message|raw }}</div>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			{% endfor %} {# messages #}
+		{% endfor %} {# type, messages #}
+		{% endblock %} {# alerts #}
+		
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        <!-- Bootstrap core JS-->
+  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  	<!-- Core theme JS-->
+ 	<script src="{{ asset('js/scripts.js') }}"></script>
+        {% endblock %} {# javascripts #}
+    </body>
+</html>
