@@ -23,6 +23,7 @@ class VideothequeController extends AbstractController
     }
     
     #[Route('/{id}', name: 'videotheque_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function showAction(Videotheque $videotheque): Response
     {
         if (!$videotheque) {

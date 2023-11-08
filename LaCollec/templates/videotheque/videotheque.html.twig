@@ -11,4 +11,5 @@
             <li><a href="{{ path('videotheque_show', {'id': videotheque.id}) }}">{{ videotheque.description }}</a></li>
             {% endfor %}
         </ul>
+        <a href="{{ path('videotheque_new') }}">new</a><br />
 {% endblock %}

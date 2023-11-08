@@ -15,17 +15,25 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/selection')]
 class SelectionController extends AbstractController
 {
+    
     #[Route('/', name: 'selection_home')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        return $this->render('selection/index.html.twig', [
-            'controller_name' => 'SelectionController',
-        ]);
+        $selections=[];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Check if the "search_query" field is set in the POST request
+            if (isset($_POST["search_query"])) {
+                $entityManager= $doctrine->getManager();
+                $search_query = $_POST["search_query"];
+                $selections = $entityManager->getRepository(Selection::class)->findByDescription($search_query);
+            }
+        }
+        return $this->render('selection/index.html.twig', ['selections' => $selections]);
     }
     
     #[Route('/list', name: 'selection_list', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function listAction(ManagerRegistry $doctrine)
+    public function listAction()
     {
         return $this->render('selection/selection.html.twig');
     }
@@ -40,7 +48,7 @@ class SelectionController extends AbstractController
         return $this->render('selection/list.html.twig', ['selection' => $selection]);
     }
     
-    #[Route('/new', name: 'video_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'selection_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

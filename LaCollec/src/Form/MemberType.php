@@ -16,6 +16,7 @@ class MemberType extends AbstractType
             ->add('description')
             ->add('Videotheque')
             ->add('selection')
+            ->add('user')
         ;
     }
 

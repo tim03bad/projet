@@ -15,21 +15,8 @@
     <h1>Bienvenue sur LaCollec !</h1>
 {% endif %}
     <h3>Cherchez ce qui vous fait envie</h3>
-    <form method="POST">
-        <input type="search" id="search" name="search_query"/>
+    <form method="POST" action="result">
+        <input type="search" id="site-search" />
     </form>
-
-    {% if selections %}
-    <p>Voici les selections trouvées:</p>
-        <ul>
-            {% for selection in selections %}
-            {% if selection.publie==true %}
-            <li><a href="{{ path('selection_show', {'id': selection.id}) }}">{{ selection.description }}</a></li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
 </div>
-
-
 {% endblock %}

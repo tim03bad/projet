@@ -45,4 +45,22 @@ class SelectionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    /**
+     * Find entities where the 'Description' field starts with a specific string.
+     *
+     * @param string $prefix The prefix to search for.
+     * @return Selection[]
+     */
+    public function findByDescription($prefix)
+    {
+        return $this->createQueryBuilder('e')
+        ->join('e.member', 'm')
+        ->join('e.video', 'v')
+        ->Where('e.description LIKE :prefix')
+        ->orWhere('m.nom LIKE :prefix')
+        ->orWhere('v.nom LIKE :prefix')
+        ->setParameter('prefix', $prefix . '%')
+        ->getQuery()
+        ->getResult();
+    }
 }

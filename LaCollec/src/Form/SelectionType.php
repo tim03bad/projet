@@ -14,7 +14,6 @@ class SelectionType extends AbstractType
         $builder
             ->add('description')
             ->add('publie')
-            ->add('member')
             ->add('video')
         ;
     }

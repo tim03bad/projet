@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
+use App\Form\UserType;
 
 class LoginController extends AbstractController
 {
@@ -31,6 +35,29 @@ class LoginController extends AbstractController
         dump("logout");
         // throw new \Exception('Don\'t forget to activate logout in security.yaml');
         return new Response();
+    }
+    
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            // Make sure message will be displayed after redirect
+            $this->addFlash('message', 'bien ajouté');
+            // $this->addFlash() is equivalent to $request->getSession()->getFlashBag()->add()
+            return $this->redirectToRoute('selection_home', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->render('login/new.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
     }
 }
 

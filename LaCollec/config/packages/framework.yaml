@@ -19,7 +19,9 @@ framework:
         log: true
         
     assets:
-        base_path: '/startbootstrap-bare-gh-pages'
+        packages:
+            bootstrap:
+                base_path: '/startbootstrap-bare-gh-pages'
 
 when@test:
     framework:

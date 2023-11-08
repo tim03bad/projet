@@ -4,11 +4,12 @@
 
 {% block body %}
         <h1>selection list</h1>
-        <p>Voici toutes les selections:</p>
+        <p>Voici toutes mes selections:</p>
         
         <ul>
             {% for selection in app.user.member.selection %}
             <li><a href="{{ path('selection_show', {'id': selection.id}) }}">{{ selection.description }}</a></li>
             {% endfor %}
         </ul>
+        <a href="{{ path('selection_new') }}">new</a><br />
 {% endblock %}
