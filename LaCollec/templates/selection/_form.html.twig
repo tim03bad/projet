@@ -1,4 +1,20 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.description) }}
+    {{ form_row(form.publie) }}
+{% for choice in form.video.vars.choices %}
+    {# Add conditions to filter choices based on specific criteria #}
+    {% if choice.data.videotheque.member.user == app.user %}
+        <label>
+            <input type="checkbox" name="{{ form.video.vars.full_name }}" value="{{ choice.value }}" {% if choice.data in form.video.vars.data %}checked{% endif %}>
+            {{ choice.label }}
+        </label><br>
+      {% endif %}
+{% endfor %}
+
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <a href="{{ path('selection_list') }}">back to list</a>
+
+    {{ form_row(form._token) }}
+{{ form_end(form, {render_rest: false}) }}

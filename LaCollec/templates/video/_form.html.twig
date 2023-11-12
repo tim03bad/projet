@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.annee) }}
+    {{ form_row(form.genre) }}
+<select name="{{ form.videotheque.vars.full_name }}">
+    <option value=""{% if not form.videotheque.vars.value %} selected{% endif %}>Select a videotheque</option>
+    {% for choice in form.videotheque.vars.choices %}
+        {# Add conditions to filter choices based on specific criteria #}
+        {% if choice.data.member.user == app.user %}
+            <option value="{{ choice.value }}" {% if choice.value == form.videotheque.vars.value %}selected{% endif %}>
+                {{ choice.label }}
+            </option>
+        {% endif %}
+    {% endfor %}
+</select>
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form._token) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <div class="hidden"><\div>
+{{ form_end(form, {render_rest: false}) }}

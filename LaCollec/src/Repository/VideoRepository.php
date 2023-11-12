@@ -45,4 +45,14 @@ class VideoRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByMember($member)
+    {
+        return $this->createQueryBuilder('e')
+        ->join('e.videotheque', 'v')
+        ->where('v.member = :member')
+        ->setParameter('member', $member)
+        ->getQuery()
+        ->getResult();
+    }
 }

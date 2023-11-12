@@ -98,4 +98,9 @@ class Selection
 
         return $this;
     }
+    
+    public function __toString()
+    {
+        return $this->getDescription(); // Adjust this to return the desired property as a string
+    }
 }

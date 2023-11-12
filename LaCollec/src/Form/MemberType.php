@@ -9,14 +9,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MemberType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom')
             ->add('description')
-            ->add('Videotheque')
-            ->add('selection')
-            ->add('user')
         ;
     }
 
