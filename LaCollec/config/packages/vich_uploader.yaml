@@ -4,6 +4,6 @@ vich_uploader:
     mappings:
         videos:
             uri_prefix: /images/video
-            upload_destination: '%kernel.project_dir%/public/images/videos'
+            upload_destination: '%kernel.project_dir%/public/images/video'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 

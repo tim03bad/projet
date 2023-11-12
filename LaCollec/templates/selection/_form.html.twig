@@ -17,4 +17,5 @@
     <a href="{{ path('selection_list') }}">back to list</a>
 
     {{ form_row(form._token) }}
+    <div class="hidden">{{ form_row(form.member) }}<\div>
 {{ form_end(form, {render_rest: false}) }}

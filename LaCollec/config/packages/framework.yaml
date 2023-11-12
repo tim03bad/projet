@@ -22,6 +22,9 @@ framework:
         packages:
             bootstrap:
                 base_path: '/startbootstrap-bare-gh-pages'
+    # config/packages/dev/framework.yaml
+    profiler: { enabled: true }
+
 
 when@test:
     framework:

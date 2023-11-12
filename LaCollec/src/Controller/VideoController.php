@@ -44,8 +44,7 @@ class VideoController extends AbstractController
             // Change content-type according to image's
             $imagefile = $video->getImageFile();
             if($imagefile) {
-                $mimetype = $imagefile->getMimeType();
-                $video->setContentType($mimetype);
+                $video->setImageFile($imagefile);
             }
             
             $entityManager->persist($video);
