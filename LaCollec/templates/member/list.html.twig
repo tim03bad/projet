@@ -10,6 +10,7 @@
             {% if app.user.member.description is not null %}
             <li>description : {{ app.user.member.description }}</li>
             {% endif %}
+            <a href="{{ path('member_edit', {'id': app.user.member.id}) }}">edit</a><br />
             <br />
             videotheques :
             <br />

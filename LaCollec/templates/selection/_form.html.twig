@@ -13,7 +13,7 @@
       {% endif %}
 {% endfor %}
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary btn-block mb-4">{{ button_label|default('Save') }}</button>
     <a href="{{ path('selection_list') }}">back to list</a>
 
     {{ form_row(form._token) }}

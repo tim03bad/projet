@@ -2,7 +2,7 @@
     {{ form_errors(form) }}
 
     {{ form_row(form.description) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary btn-block mb-4">{{ button_label|default('Save') }}</button>
     <a href="{{ path('videotheque_list') }}">back to list</a>
 
     <div class="hidden">{{ form_row(form.member) }}

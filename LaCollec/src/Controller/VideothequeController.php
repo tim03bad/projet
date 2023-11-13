@@ -81,13 +81,11 @@ class VideothequeController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Videotheque $videotheque, EntityManagerInterface $entityManager): Response
     {
-        foreach($videotheque->getContenu() as $video) {
-            if ($this->isCsrfTokenValid('delete'.$video->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$videotheque->getId(), $request->request->get('_token'))) {
+            foreach($videotheque->getContenu() as $video) {
                 $entityManager->remove($video);
                 $entityManager->flush();
             }
-        }
-        if ($this->isCsrfTokenValid('delete'.$videotheque->getId(), $request->request->get('_token'))) {
             $entityManager->remove($videotheque);
             $entityManager->flush();
         }
