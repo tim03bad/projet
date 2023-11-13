@@ -23,13 +23,14 @@ class VideoController extends AbstractController
     }
     
     #[Route('/{id}', name: 'video_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function showAction(Video $video): Response
+    public function showAction(Video $video, Request $request): Response
     {
+        $previousUrl = $request->headers->get('referer');
         if (!$video) {
             throw $this->createNotFoundException('The Video does not exist');
         }
         
-        return $this->render('video/list.html.twig',['video' => $video]);
+        return $this->render('video/list.html.twig',['video' => $video, 'previous_url' => $previousUrl]);
     }
     
     #[Route('/new', name: 'video_new', methods: ['GET', 'POST'])]

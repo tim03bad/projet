@@ -22,6 +22,10 @@
 	    <a href="{{ path('video_edit', {'id': video.id}) }}">edit</a><br />
             <a href="{{ path('video_list') }}">retour à la liste des vidéos</a><br />
             <a href="{{ path('videotheque_show', {'id': video.videotheque.id}) }}">retour à  {{ video.videotheque.description }}</a>
-	{% endif %}
+        {% else %}
+            <a href="{{ previous_url }}">Retour à la sélection</a>
+	    {% endif %}
+        {% else %}
+            <a href="{{ previous_url }}">Retour à la sélection</a>
         {% endif %}
 {% endblock %}

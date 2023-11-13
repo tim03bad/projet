@@ -34,7 +34,7 @@ class MemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             
-            return $this->redirectToRoute('_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('member_show', [], Response::HTTP_SEE_OTHER);
         }
         
         return $this->render('member/edit.html.twig', [

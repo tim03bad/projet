@@ -30,7 +30,7 @@
         {% if is_granted('ROLE_USER') %}
         {% if app.user.member.nom==selection.member.nom %}
 	        <a href="{{ path('selection_edit', {'id': selection.id}) }}">edit</a><br />
+            <a href="{{ path('selection_list') }}">retour à la liste des selections</a><br />
 	    {% endif %}
         {% endif %}
-        <a href="{{ path('selection_list') }}">retour à la liste des selections</a><br />
 {% endblock %}
